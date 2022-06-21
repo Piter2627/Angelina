@@ -1,0 +1,45 @@
+{
+  "slug": "how-to",
+  "cover": "image/jxu1OdD7LKOGIDU7jURMpSH2lyK2/fjFJRFnHXiem8yF0GGQ9.svg",
+  "title": "i18n.paths.how_to.title",
+  "updated": "February 11, 2022",
+  "description": "i18n.paths.how_to.description",
+  "overview": "i18n.paths.how_to.overview",
+  "topics": [
+    {
+      "title": "i18n.paths.how_to.topics.files",
+      "pathItems": [
+        "how-to-open-files",
+        "how-to-open-a-directory",
+        "how-to-save-a-file",
+        "how-to-drag-and-drop-files",
+        "how-to-drag-and-drop-directories",
+        "how-to-work-with-the-origin-private-file-system",
+        "how-to-share-files",
+        "how-to-receive-shared-files",
+        "how-to-handle-files-opened-from-the-file-explorer"
+      ]
+    },
+    {
+      "title": "i18n.paths.how_to.topics.clipboard",
+      "pathItems": [
+        "how-to-copy-text",
+        "how-to-copy-images",
+        "how-to-copy-generic-data",
+        "how-to-paste-text",
+        "how-to-paste-images",
+        "how-to-paste-generic-data",
+        "how-to-paste-files"
+      ]
+    },
+    {
+      "title": "i18n.paths.how_to.topics.system",
+      "pathItems": [
+        "how-to-get-contacts-from-the-address-book",
+        "how-to-set-an-app-badge",
+        "how-to-customize-the-window-title-bar",
+        "how-to-create-app-icon-shortcuts"
+      ]
+    }
+  ]
+}
