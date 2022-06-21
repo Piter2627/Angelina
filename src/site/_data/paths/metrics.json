@@ -1,0 +1,32 @@
+{
+  "slug": "metrics",
+  "cover": "/images/collections/metrics.svg",
+  "title": "i18n.paths.metrics.title",
+  "description": "i18n.paths.metrics.description",
+  "overview": "i18n.paths.metrics.overview",
+  "topics": [
+    {
+      "title": "i18n.paths.metrics.topics.introduction",
+      "pathItems": [
+        "user-centric-performance-metrics"
+      ]
+    },
+    {
+      "title": "i18n.paths.metrics.topics.important_metrics_to_measure",
+      "pathItems": [
+        "fcp",
+        "lcp",
+        "fid",
+        "tti",
+        "tbt",
+        "cls"
+      ]
+    },
+    {
+      "title": "i18n.paths.metrics.topics.define_your_own_metrics",
+      "pathItems": [
+        "custom-metrics"
+      ]
+    }
+  ]
+}
