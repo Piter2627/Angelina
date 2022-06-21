@@ -1,0 +1,6 @@
+!/.*
+.tmp/*
+dist/*
+types/*
+/functions/supportedLocales.js
+/src/site/content/en/patterns/**
