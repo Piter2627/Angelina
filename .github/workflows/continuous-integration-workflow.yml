@@ -1,0 +1,48 @@
+name: Deploy
+on:
+  # Adds a 'Run Workflow' button to the GitHub Actions UI so the team can
+  # manually deploy the site.
+  workflow_dispatch:
+
+  # Automatically build and deploy the site hourly, Mon-Fri
+  schedule:
+    - cron: '0 * * * 1-5'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test
+        run: npm run test
+
+      - name: Setup Firebase Tools
+        run: npm i -g firebase-tools
+
+      - name: Deploy to production
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          ALGOLIA_APP: ${{ secrets.ALGOLIA_APP }}
+          ALGOLIA_KEY: ${{ secrets.ALGOLIA_KEY }}
+        run: firebase deploy --non-interactive --token $FIREBASE_TOKEN
