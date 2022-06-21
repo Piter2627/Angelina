@@ -1,0 +1,106 @@
+/// COMPONENT LIBRARY LOCATION
+/// https://web.dev/design-system/component/select
+
+select,
+web-select > label {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid get-utility-value('color', 'mid-text');
+  border-radius: 0;
+  color: get-utility-value('color', 'core-text');
+  font: inherit;
+  height: 3rem;
+  max-width: 20rem;
+  padding: 10px 10px 10px 0;
+  width: 100%;
+}
+
+web-select > label {
+  display: inline-flex;
+  padding: 10px 0 10px 4px;
+}
+
+select:focus,
+web-select[active] > label {
+  outline: none;
+  border-bottom: 1px solid get-utility-value('color', 'action-text');
+}
+
+web-select > label:after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' width='24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  content: '';
+  width: 24px;
+}
+
+web-select > label > span {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+web-select > ul {
+  background-color: get-utility-value('bg', 'mid-bg');
+  height: 0;
+  transition: all 0.2s ease;
+  margin: 2px 0 0 0;
+  max-height: 20rem;
+  max-width: 20rem;
+  opacity: 0;
+  overflow-y: auto;
+  position: absolute;
+  padding: 0;
+  pointer-events: none;
+  width: 100%;
+  z-index: 999;
+}
+
+web-select[active] > ul {
+  height: auto;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+web-select > ul > li {
+  color: get-utility-value('color', 'mid-text');
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.2s ease;
+}
+
+web-select > ul > li:hover,
+web-select > ul > li:focus {
+  background-color: get-utility-value('bg', 'check-bg');
+  outline: none;
+}
+
+select.language-select {
+  appearance: none;
+  background-color: get-utility-value('bg', 'core-bg');
+  // Use an escaped svg to add a small grey arrow to the end of the select
+  // sass-lint:disable quotes
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10L12 15L17 10H7Z' fill='%235F6368'/%3E%3C/svg%3E%0A");
+  // Set the width of the arrow background image and let the height default to auto
+  background-position: right 0.5em top 50%;
+  background-repeat: no-repeat;
+  background-size: 1.5em;
+  border: $global-stroke;
+  border-radius: $global-radius-base;
+  color: get-utility-value('color', 'core-text');
+  display: block;
+  font: inherit;
+  height: auto;
+  line-height: 1.1;
+  max-width: 40rem;
+  padding: 1em 3em 1em 0.8em;
+  width: 100%;
+  -webkit-appearance: none;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &:hover {
+    background-color: get-utility-value('bg', 'accent-bg');
+  }
+}
