@@ -1,0 +1,14 @@
+{% set gitlocalizeUrl =  page.inputPath | gitlocalizeLink(lang) %}
+{% if translated %}
+{% Banner 'neutral' %}
+    {% if translated === 'none' %}
+    This page is not translated yet.
+    {% else %}
+    This article was translated from
+    [the original post](/en{{ page.data.canonicalUrl }}).
+    {% endif %}
+    {% if gitlocalizeUrl %}
+    Consider improving it by [contributing your translation]({{ gitlocalizeUrl }}).
+    {% endif %}
+{% endBanner %}
+{% endif %}
