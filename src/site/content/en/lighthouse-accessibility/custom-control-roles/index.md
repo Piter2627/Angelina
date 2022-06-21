@@ -1,0 +1,80 @@
+---
+layout: post
+title: Custom controls have ARIA roles
+description: |
+  Learn how to improve your web page's accessibility by making sure custom
+  controls have ARIA roles that assistive technologies can interpret.
+date: 2019-05-02
+updated: 2019-09-19
+web_lighthouse:
+  - custom-control-roles
+---
+
+Check that all custom controls have an appropriate `role` and
+any required ARIA attributes that confer their properties and state.
+For example, a custom checkbox needs a `role="checkbox"` and
+`aria-checked="true|false"` to properly convey its state.
+See the [Introduction to ARIA](https://developers.google.com/web/fundamentals/accessibility/semantics-aria/)
+for a general overview of how ARIA can provide missing semantics for custom controls.
+
+## How to manually test
+
+To check that all custom interactive controls have appropriate ARIA roles,
+test the page using a screen reader.
+This example compares a `<div>` to a `<button>`
+(you'll need to click "Enable ChromeVox Lite" to test it):
+
+<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
+  <iframe
+    src="https://glitch.com/embed/#!/embed/div-vs-button?path=example.html&previewSize=100&attributionHidden=true"
+    alt="div-vs-button on Glitch"
+    style="height: 100%; width: 100%; border: 0;">
+  </iframe>
+</div>
+
+Using CSS, it's possible
+to style the `<div>` and `<button>` elements so they convey the same visual affordances,
+but the two experiences are very different when using the screen reader.
+A `<div>` is just a generic grouping element,
+so the screen reader only announces the text content of the `<div>`.
+The `<button>` is announced as a "button",
+a much stronger signal to the user that this is something with which they can interact.
+See also [Semantics and screen readers](/semantics-and-screen-readers).
+
+## How to fix
+
+So the simplest,
+and reasonably the best solution to this problem
+is to avoid custom interactive controls all together.
+For example, replace the `<div>` that's acting like a button
+with an actual `<button>`.
+
+If you must keep the `<div>`,
+then add `role="button"` and `aria-pressed="false"` to the `<div>`:
+
+<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
+  <iframe
+    src="https://glitch.com/embed/#!/embed/gorgeous-raven?path=example.html:13:39"
+    alt="div-vs-button on Glitch with role and ARIA attribute"
+    style="height: 100%; width: 100%; border: 0;">
+  </iframe>
+</div>
+
+Now the screen reader announces the role and interactive state for the `<div>`.
+
+## Why this matters
+
+The only way to truly understand how assistive technology users
+experience your content
+is to check that content yourself using a screen reader.
+Using a screen reader first hand will give you a clear understanding
+of how your content is labeled, and if there are any obstructions to
+assistive technology navigation.
+If you're unfamiliar with how semantic markup gets interpreted by assistive technology,
+see the [Introduction to Semantics](https://developers.google.com/web/fundamentals/accessibility/semantics-builtin/) for a refresher.
+
+See also [How to Do an Accessibility Review](https://developers.google.com/web/fundamentals/accessibility/how-to-review#try_it_with_a_screen_reader).
+
+## Resources
+
+[Source code for **Custom controls have ARIA roles** audit](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/accessibility/manual/custom-controls-roles.js)
