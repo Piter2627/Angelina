@@ -1,0 +1,20 @@
+name: 'Find comment'
+description: 'Finds the id of the first comment by the GitHub Actions bot.'
+runs:
+  using: 'node12'
+  main: 'main.js'
+inputs:
+  token:
+    description: |
+      The secrets.GITHUB_TOKEN.
+    required: true
+  author:
+    description: |
+      The name of the author to search for in the list of comments to update.
+      This task will find the id of the first comment by this author, or the
+      empty string if the author has not commented yet.
+    required: false
+    default: 'github-actions[bot]'
+outputs:
+  comment-id:
+    description: The id of the first comment by the GitHub Actions bot.
