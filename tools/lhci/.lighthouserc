@@ -1,0 +1,16 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 3,
+      "startServerCommand": "npm start",
+      "url": [
+        "http://localhost:8080/",
+        "http://localhost:8080/blog/",
+        "http://localhost:8080/measure/"
+      ]
+    }
+  },
+  "assert": {
+    "preset": "lighthouse:recommended"
+  }
+}
