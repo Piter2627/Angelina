@@ -1,0 +1,67 @@
+@import '../../../styles/tools/mixins';
+
+web-question {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%; // Constrains white-space:pre elements
+}
+
+.web-question__content {
+  display: block;
+  flex: 1 1 0;
+  height: 0;
+  padding: 0 1.5rem 1.5rem;
+  overflow-y: auto;
+
+  @include bp(sm) {
+    & {
+      flex: 1 1 auto;
+      height: 25rem;
+    }
+  }
+}
+
+.web-question__footer {
+  border-top: 1px solid $BORDER_COLOR;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: .625rem;
+
+  @include bp(sm) {
+    & {
+      padding: 1rem;
+    }
+  }
+}
+
+.web-question__cta {
+  overflow: visible;
+}
+
+.web-question__cta::before {
+  @include font-material-icon();
+  align-items: center;
+  background: $SUCCESS_COLOR;
+  border-radius: $GLOBAL_ROUNDED;
+  color: $WHITE;
+  content: 'check';
+  display: flex;
+  font-size: 18px;
+  height: 24px;
+  justify-content: center;
+  left: calc(-24px - .5rem);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  top: calc(50% - 12px);
+  transform: scale(0);
+  transition: opacity $TRANSITION_SPEED * 2 ease, transform $TRANSITION_SPEED ease;
+  width: 24px;
+}
+
+[state=completed] .web-question__cta::before {
+  opacity: 1;
+  transform: scale(1);
+}
