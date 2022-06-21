@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title if title else path.title}}</title>
+    <meta name="description" content="{{description if description else path.description}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Don't index our staging site. #}
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="full_width" value="true" />
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin="" />
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin="" />
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin="" />
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin="" />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic|Roboto+Condensed:400,700|Roboto+Mono:400,500|Material+Icons"
+    />
+    <link rel="stylesheet" href="/app.css" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    {# Include default icon even though we have a manifest #}
+    <link rel="icon" type="image/png" href="/images/icon-128x128.png" sizes="128x128" />
+    <script defer src="//www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+    <script defer src="//www.gstatic.com/firebasejs/6.6.1/firebase-auth.js"></script>
+    {# This is used by src/lib/firestore-loader.js to dynamically load Firestore #}
+    <meta id="firebase-firestore" value="//www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js" />
+    <script type="module" src="/bootstrap.js"></script>
+    <script>
+      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+      ga('create', 'UA-126406676-2');
+      ga('set', 'transport', 'beacon');
+    </script>
+    <script async src="//www.google-analytics.com/analytics.js"></script>
+  </head>
+  <body>
+    {#
+      Make the snackbar the first item in the DOM so we don't have to steal the
+      user's focus on initial visit to show them a cookie banner. Instead, the
+      snackbar will be the first stop for the screen reader / focus.
+    #}
+    <web-snackbar-container></web-snackbar-container>
+    <web-header role="navigation">
+      <button class="web-header__hamburger-btn" aria-label="menu"></button>
+
+      <a
+        href="/"
+        class="gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="Site logo"
+      >
+        <img class="web-header__logo" src="/images/lockup.svg" alt="web.dev" />
+      </a>
+
+      <div class="web-header__middle">
+        <div class="web-header__links">
+          <a
+            href="/learn"
+            class="web-header__link gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Tab: Learn"
+          >
+            Learn
+          </a>
+
+          <a
+            href="/measure"
+            class="web-header__link gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Tab: Measure"
+          >
+            Measure
+          </a>
+
+          <a
+            href="/blog"
+            class="web-header__link gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Tab: Blog"
+          >
+            Blog
+          </a>
+
+          <a
+            href="/about"
+            class="web-header__link gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Tab: About"
+          >
+            About
+          </a>
+        </div>
+      </div>
+
+      <web-profile-switcher-container></web-profile-switcher-container>
+    </web-header>
+
+    <web-side-nav>
+      <a
+        href="/learn"
+        class="web-side-nav__link gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="SideNav: Learn"
+      >
+        Learn
+      </a>
+      <a
+        href="/measure"
+        class="web-side-nav__link gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="SideNav: Measure"
+      >
+        Measure
+      </a>
+      <a
+        href="/blog"
+        class="web-side-nav__link gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="SideNav: Blog"
+      >
+        Blog
+      </a>
+      <a
+        href="/about"
+        class="web-side-nav__link gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="SideNav: About"
+      >
+        About
+      </a>
+    </web-side-nav>
+    <main>
+      <div id="content">
+        {{ content | safe }}
+      </div>
+    </main>
+    {% include 'partials/footer.njk' %}
+  </body>
+</html>
