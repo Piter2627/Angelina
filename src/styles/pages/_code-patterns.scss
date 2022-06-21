@@ -1,0 +1,8 @@
+@import '../settings/colors';
+@import '../tools/breakpoints';
+
+
+.code-patterns__more {
+  @include w-body-text();
+  margin: 0 0 32px;
+}

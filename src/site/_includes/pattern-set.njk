@@ -1,0 +1,138 @@
+---
+layout: default-next
+pageScripts:
+  - '/js/content.js'
+---
+
+{#
+  This page displays a set (or a suite of sets) of code patterns.
+  Code patterns are organized as follows:
+  /patterns/ -> PatternSuites -> PatternSets -> Patterns
+#}
+
+{% from 'macros/code-pattern.njk' import codePattern with context %}
+
+{% if page.url %}
+  {% set patternSetId = page.url | getRelativePath('/patterns/') %}
+{% else %}
+  {% set patternSetId = '' %}
+{% endif %}
+
+{% if patternSetId %}
+  {% set patternSet = patterns.sets[patternSetId] %}
+{% else %}
+  {% set patternSet = null %}
+{% endif %}
+
+{% if patternSet.suite %}
+  {# This is a page for a PatternSet.
+    patternSuite variable is set to the parent of the current set. #}
+  {% set patternSuite = patterns.sets[patternSet.suite] %}
+  {% set currentPatternSet = patternSet %}
+{% else %}
+  {# This is a page for a PatternSuite.
+    There is no current pattern set selected. #}
+  {% set patternSuite = patterns.sets[patternSetId] %}
+  {% set currentPatternSet = null %}
+{% endif %}
+
+<section class="wrapper">
+  {% from 'macros/breadcrumbs.njk' import breadcrumbs with context %}
+  {% set allPatternsName = 'i18n.patterns.all_patterns' | i18n(locale) %}
+  {% set crumbs = [
+    [allPatternsName, '/patterns/'],
+    [patternSuite.title, '/patterns/' + patternSuite.id]
+  ] %}
+  {{ breadcrumbs(crumbs) }}
+</section>
+
+<header class="wrapper region">
+  <div class="path__header">
+    <div>
+      <h1 class="text-size-6">{{ patternSuite.title }}</h1>
+      <p> {{ patternSuite.description }}</p>
+    </div>
+    <div class="all-center">
+      {% Img
+          height=220,
+          width=330,
+          src=patternSuite.hero,
+          alt="Collection cover image",
+          decoding="async",
+          class="w-masthead-path__image"
+        %}
+    </div>
+  </div>
+</header>
+
+<hr>
+
+<div class="wrapper pad-block-size-1">
+  <div class="sidebar" data-direction="rtl">
+    <div class="pad-block-size-1 flow prose">
+      {# Show patterns from current set (if set) or from the whole suite #}
+      {% if currentPatternSet %}
+        <h2 class="w-headline--two">{{ currentPatternSet.title }}</h2>
+        {{ content | safe }}
+        <div>
+        {% for patternId, pattern in patterns.patterns %}
+          {% if pattern.set == currentPatternSet.id %}
+            {{ codePattern(pattern) }}
+          {% endif %}
+        {% endfor %}
+        </div>
+
+      {% else %}
+
+        {{ content | safe }}
+
+        {# Patterns in PatternSets that belong to the current suite #}
+        {% for patternSetId, patternSet in patterns.sets %}
+          {% if patternSet.suite == patternSuite.id %}
+            <h2 class="w-headline--two">{{ patternSet.title }}</h2>
+            {{ patternSet.rawContent | siteRender | safe }}
+            <div>
+            {% for patternId, pattern in patterns.patterns %}
+              {% if pattern.set == patternSetId %}
+                {{ codePattern(pattern) }}
+              {% endif %}
+            {% endfor %}
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        {# Patterns that belong directly to the pattern suite #}
+        <div>
+          {% for patternId, pattern in patterns.patterns %}
+            {% if pattern.set == patternSuite.id %}
+              {{ codePattern(pattern) }}
+            {% endif %}
+          {% endfor %}
+        </div>
+
+      {% endif %}
+    </div>
+    <div class="pad-block-size-1">
+      <div class="toc">
+        <div class="toc__content">
+          <ul class="toc__list">
+            {% if currentPatternSet %}
+              <li><a href="/patterns/{{patternSuite.id}}">All</a></li>
+            {% else %}
+              <li><a class="w-scroll-spy__active" href="/patterns/{{patternSuite.id}}">All</a></li>
+            {% endif %}
+            {% for setId, set in patterns.sets %}
+              {% if set.suite == patternSuite.id %}
+                {% if setId == currentPatternSet.id %}
+                  <li><a class="w-scroll-spy__active" href="/patterns/{{set.id}}">{{set.title}}</a></li>
+                {% else %}
+                  <li><a href="/patterns/{{set.id}}">{{set.title}}</a></li>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
