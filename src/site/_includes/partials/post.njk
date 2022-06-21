@@ -1,0 +1,83 @@
+{# *-landing-page classes are a holdover from devsite. #}
+{# It would be great to remove them as part of the v1 migration. #}
+<div class="guide-landing-page">
+  {% if hero %}
+    {% Hero {
+      page: page,
+      hero: hero,
+      alt: alt,
+      heroPosition: hero_position
+    } %}
+  {% endif %}
+
+  {# Make sure Actions are first in the tab order. #}
+  <web-actions-controller page="post"></web-actions-controller>
+  {% Actions %}
+    {% ShareAction title, page.url | stripLanguage %}
+    {% SubscribeAction %}
+  {% endActions %}
+
+  <main class="w-layout-container--narrow w-post-content">
+    <header class="w-article-header">
+      <h1 class="w-article-header__headline">{{ title }}</h1>
+      {% if subhead %}
+        <p class="w-article-header__subhead w-mb--non">
+          {{ subhead }}
+        </p>
+      {% endif %}
+
+      {% if date %}
+        <div class="w-author__published">
+          <time>{{page.date | prettyDate}}</time>
+          {% if updated %} <span class="w-author__separator">•</span> Updated <time>{{ updated | prettyDate }}</time> {% endif %}
+        </div>
+      {% endif %}
+
+      {% if authors %}
+        <div class="w-authors w-mt--xl w-pt--sm">
+          {% for author in authors %}
+            {% Author {
+              post: page,
+              author: contributors[author],
+              avatar: author,
+              showSocialMedia: true}
+            %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </header>
+    {{ content | safe }}
+
+    {# Hide tags for now. #} {#
+    <div class="w-chips">
+      <a class="w-chip" href="#">Artificial Intellegence</a>
+      <a class="w-chip" href="#">User Experience</a>
+      <a class="w-chip" href="#">Learning</a>
+    </div>
+    #}
+
+    <div class="w-post-github-link w-mt--l">
+      <span class="w-mr--sm">
+        {% if updated %}
+        Last updated: <time>{{ updated | prettyDate }}</time>
+        {% else %}
+        Last updated: <time>{{ page.date | prettyDate }}</time>
+        {% endif %}
+      </span>
+      <a
+        href="{{ page.inputPath | githubLink }}"
+      >
+        Improve article
+      </a>
+      {# Hide suggest translation for now. #} {#
+      <a href="#">Suggest translation</a> #}
+    </div>
+
+    {% if codelabs %}
+      {% CodelabsCallout codelabs %}
+    {% endif %}
+  </main>
+
+  {% RelatedContent page.fileSlug %}
+
+</div>

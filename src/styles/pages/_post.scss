@@ -1,0 +1,27 @@
+@import '../settings/colors';
+@import '../tools/breakpoints';
+
+// sass-lint:disable class-name-format
+.guide-landing-page {
+  position: relative;
+}
+// sass-lint:enable class-name-format
+
+.w-post-content {
+  padding-bottom: 64px;
+
+  @include bp(md) {
+    padding-bottom: 96px;
+  }
+}
+
+.w-post-github-link {
+  color: $GREY_700;
+  font-size: .875em;
+}
+
+.w-codelabs-callout {
+  @include bp(sm) {
+    margin-top: 64px;
+  }
+}
