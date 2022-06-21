@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title if title else path.title}}</title>
+    <meta name="description" content="{{description if description else path.description}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {# Don't index our staging site. #}
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="full_width" value="true" />
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin="" />
+    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin="" />
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin="" />
+    <link
+      rel="stylesheet"
+      href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic|Roboto+Condensed:400,700|Roboto+Mono:400,500|Material+Icons"
+    />
+    {# Add cache busting URLs when we're doing a prod build #}
+    {% if site.env === 'prod' %}
+      <link rel="stylesheet" href="/{{site.entrypoints.appCss}}" />
+      <script type="module" src="/{{site.entrypoints.appJs}}"></script>
+    {% else %}
+      <link rel="stylesheet" href="/app.css" />
+      <script type="module" src="/app.js"></script>
+    {% endif %}
+  </head>
+  <body>
+    {% include 'devsite/devsite-header.njk' %}
+    <main>
+      <div id="content">
+        {{ content | safe }}
+      </div>
+    </main>
+  </body>
+</html>
