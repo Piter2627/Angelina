@@ -1,0 +1,68 @@
+---
+layout: default
+title: Learn
+description: |
+  Learn best practices for the modern web and hone your skills with hands-on
+  codelabs.
+date: 2018-11-05
+pageScripts:
+  - '/js/learn.js'
+---
+{# *-landing-page classes are a holdover from devsite. #}
+{# It would be great to remove them as part of the v1 migration. #}
+<div class="learn-landing-page">
+
+  <div class="w-layout-container">
+    <header class="w-page-header">
+      <h1 class="w-page-header__headline">{{ title }}</h1>
+      <p class="w-page-header__copy">
+        {{ 'i18n.learn.header' | i18n(locale) }}
+      </p>
+    </header>
+  </div>
+
+  <div class="sm:pad-left-500 sm:pad-right-500">
+    <div class="learn-section gap-left-auto gap-right-auto">
+      <h3 id="{{ 'i18n.learn.courses' | i18n(locale) | slug }}" class="w-learn-heading">
+        {{ 'i18n.learn.courses' | i18n(locale) }}
+        <a class="w-headline-link" href="#{{ 'i18n.learn.courses' | i18n(locale) | slug }}" aria-hidden="true">#</a>
+      </h3>
+      {% include 'partials/course-cards.njk' %}
+    </div>
+  </div>
+
+  <hr class="gap-top-400 gap-bottom-700">
+
+  <section class="w-grid w-learn__collections-heading">
+    <h2 id="{{ 'i18n.learn.collections' | i18n(locale) | slug }}" class="w-learn-heading">
+      {{ 'i18n.learn.collections' | i18n(locale) }}
+      <a class="w-headline-link" href="#{{ 'i18n.learn.collections' | i18n(locale) | slug }}" aria-hidden="true">#</a>
+    </h2>
+
+    {% set filterItems = [{title: 'i18n.common.all' | i18n(locale)}] %}
+    {% for category, paths in learn %}
+      {% set i18nKey = 'i18n.learn.' + category %}
+      {% set filterItems = (filterItems.push({title: i18nKey | i18n(locale), id: i18nKey | i18n(locale) | slug}), filterItems) %}
+    {% endfor %}
+    <web-learn-filter filters="{{filterItems | dump}}"></web-learn-filter>
+  </section>
+
+  <section id="learning-paths">
+    {% for category, paths in learn %}
+      {% set i18nKey = 'i18n.learn.' + category %}
+      <section id="{{ i18nKey | i18n(locale) | slug }}" class="w-grid">
+        <div class="w-grid__columns w-grid__columns--gapless w-grid__columns--three">
+          <h3 class="w-learn-heading">
+            {{ i18nKey | i18n(locale) }}
+            <a class="w-headline-link" href="#{{ i18nKey | i18n(locale) | slug }}" aria-hidden="true">#</a>
+          </h3>
+        </div>
+        <div class="w-grid__columns w-grid__columns--gapless w-grid__columns--three" role="list">
+          {% for path in paths %}
+            {% PathCard path, lang %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+  </section>
+</div>
