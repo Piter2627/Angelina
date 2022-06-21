@@ -1,0 +1,43 @@
+---
+layout: default
+title: Connect
+description: |
+  TODO
+---
+<div class="connect-landing-page">
+  <header class="w-masthead-about">
+    <div class="w-masthead-about__container">
+      <div class="w-masthead-about__left">
+        <h1 class="w-headline--two w-font-weight--medium w-mt--non">
+          Connect
+        </h1>
+        <p>
+          TODO:
+        </p>
+      </div>
+      <div class="w-masthead-about__right">
+        <img class="w-masthead-about__image" src="/images/headers/about.svg" alt="">
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="w-layout-container w-pb--non">
+      <header class="w-text--center">
+        <h2 class="w-headline--two-faded w-mt--non">
+          Meet DevRel
+        </h2>
+      </header>
+    </div>
+
+    <section class="w-grid">
+      <div class="w-grid__columns w-grid__columns--three" role="list">
+        {% for key, author in authorsData %}
+          {% if author.connect %}
+            {% ConnectCard author %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  </section>
+</div>
