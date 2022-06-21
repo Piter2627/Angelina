@@ -1,0 +1,19 @@
+.w-toc {
+  $STICKY_TOP: 88px;
+
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{$STICKY_TOP});
+  justify-content: space-between;
+  margin-top: calc(-100vh + #{$STICKY_TOP});
+  padding-bottom: 24px;
+  padding-right: 24px;
+  position: sticky;
+  top: #{$STICKY_TOP};
+}
+
+.w-toc__button {
+  height: auto;
+  padding: 8px;
+}
